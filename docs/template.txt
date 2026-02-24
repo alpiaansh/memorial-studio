@@ -1,0 +1,10 @@
+{
+          "type": "image",
+          "src": "assets/B&B/bnb (2).jpg"
+        },
+        {
+          "type": "video",
+          "src": "https://www.w3schools.com/howto/rain.mp4",
+          "poster": "assets/B&B/bnb (3).jpg",
+          "thumb": "assets/B&B/bnb (3).jpg"
+        }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f1e1b">
+  <title>Sosial | Memoflix</title>
+  <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <script src="js/entry-gate.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-stack">
+        <a class="brand" href="index.html">Memoflix</a>
+        <p class="brand-note">Obrolan, teman, dan koneksi antar pengguna.</p>
+      </div>
+      <nav class="top-nav" aria-label="Navigasi utama">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="index.html">Beranda</a></li>
+          <li><a class="nav-link" href="secret-message.html">Kirim Lagu</a></li>
+          <li><a class="nav-link active" href="social.html">Sosial</a></li>
+          <li><a class="nav-link" href="notifications.html">Notifikasi</a></li>
+          <li><a class="nav-link" href="login.html" id="loginLink">Masuk</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="social-page">
+    <section class="social-shell">
+      <aside class="social-side">
+        <div class="social-side-head">
+          <h1>Pesan Langsung</h1>
+          <button type="button" class="ghost-btn" id="refreshSocialBtn">Muat Ulang</button>
+        </div>
+
+        <form class="social-add-form" id="addFriendForm">
+          <input id="addFriendInput" type="text" placeholder="Tambah teman: username" maxlength="24" autocomplete="off">
+          <button type="submit">Tambah</button>
+        </form>
+        <p class="social-status" id="socialStatus"></p>
+
+        <div class="social-box">
+          <p class="social-box-title">Request Masuk</p>
+          <div id="friendRequestsList" class="social-list"></div>
+        </div>
+
+        <div class="social-box">
+          <p class="social-box-title">Teman</p>
+          <div id="friendsList" class="social-list"></div>
+        </div>
+      </aside>
+
+      <section class="social-main">
+        <div class="social-thread-list" id="threadList"></div>
+        <section class="social-chat-panel">
+          <header class="social-chat-head" id="chatHead">
+            <h2>Pilih teman</h2>
+          </header>
+          <div class="social-chat-body" id="chatBody">
+            <p class="social-empty">Pilih teman untuk mulai chat.</p>
+          </div>
+          <form class="social-composer hidden" id="composerForm">
+            <input id="composerInput" type="text" maxlength="1000" placeholder="Tulis pesan..." autocomplete="off">
+            <button type="submit">Kirim</button>
+          </form>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <script src="supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/social.js"></script>
+</body>
+</html>

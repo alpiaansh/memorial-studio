@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff2f92">
+  <title>Profil | Memoflix</title>
+  <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <script src="js/entry-gate.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-stack">
+        <a class="brand" href="index.html">Memoflix</a>
+        <p class="brand-note">Kelola profil, statistik, dan preferensi akun.</p>
+      </div>
+      <nav class="top-nav" aria-label="Navigasi utama">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="index.html#our-memory">Kenangan Kita</a></li>
+          <li><a class="nav-link" href="index.html#timeline">Linimasa</a></li>
+          <li><a class="nav-link" href="secret-message.html">Kirim Lagu</a></li>
+          <li><a class="nav-link active" href="profile.html" id="profileNav">Profil</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="profile-page">
+    <section class="profile-shell">
+      <article class="profile-card profile-hero-card">
+        <div class="profile-hero-top">
+          <div class="profile-avatar" id="profileAvatarInitial">M</div>
+          <div class="profile-hero-copy">
+            <p class="profile-kicker">Pusat Akun</p>
+            <h1 id="profileName">-</h1>
+            <p class="profile-userline">
+              <span id="profileUsername">@-</span>
+              <span class="dot-divider">&bull;</span>
+              <span id="profileEmail">-</span>
+            </p>
+          </div>
+        </div>
+        <p class="profile-subtitle">Ringkasan aktivitas akun memorial kamu dalam satu dashboard.</p>
+      </article>
+
+      <section class="profile-stats-grid">
+        <article class="profile-stat-item">
+          <p class="stat-label">Total Komentar</p>
+          <p class="stat-value" id="statComments">0</p>
+        </article>
+        <article class="profile-stat-item">
+          <p class="stat-label">Total Suka</p>
+          <p class="stat-value" id="statLikes">0</p>
+        </article>
+        <article class="profile-stat-item">
+          <p class="stat-label">Pesan Rahasia Terkirim</p>
+          <p class="stat-value" id="statMessages">0</p>
+        </article>
+      </section>
+
+      <section class="profile-detail-grid">
+        <article class="profile-card">
+          <h2 class="profile-card-title">Informasi Akun</h2>
+          <div class="profile-info-list">
+            <p><span>Status Data</span><strong id="profileMode">-</strong></p>
+            <p><span>User ID</span><strong id="profileUid">-</strong></p>
+            <p><span>Bergabung</span><strong id="profileJoined">-</strong></p>
+          </div>
+        </article>
+
+        <article class="profile-card">
+          <h2 class="profile-card-title">Ubah Profil</h2>
+          <form class="profile-edit-form" id="profileEditForm">
+            <label for="editDisplayName">Nama Tampilan</label>
+            <input id="editDisplayName" type="text" maxlength="80" placeholder="Nama kamu">
+            <label for="editUsername">Username</label>
+            <input id="editUsername" type="text" maxlength="24" placeholder="username unik">
+            <button class="ghost-btn" type="submit">Simpan Perubahan</button>
+          </form>
+          <p class="profile-edit-status" id="profileEditStatus"></p>
+        </article>
+
+        <article class="profile-card">
+          <h2 class="profile-card-title">Aksi Cepat</h2>
+          <div class="profile-actions">
+            <button class="ghost-btn" type="button" id="refreshProfileBtn">Muat Ulang Statistik</button>
+            <a class="ghost-btn hidden" href="admin-dashboard.html" id="adminDashboardLink">Dasbor Admin</a>
+            <a class="ghost-btn" href="index.html">Kembali ke Beranda</a>
+            <button class="ghost-btn profile-logout" type="button" id="logoutBtn">Keluar</button>
+          </div>
+        </article>
+
+      </section>
+    </section>
+  </main>
+
+  <script src="supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

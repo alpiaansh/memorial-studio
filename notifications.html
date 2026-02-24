@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f1e1b">
+  <title>Notifikasi | Memoflix</title>
+  <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <script src="js/entry-gate.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-stack">
+        <a class="brand" href="index.html">Memoflix</a>
+        <p class="brand-note">Aktivitas akun, mention, dan update sistem.</p>
+      </div>
+      <nav class="top-nav" aria-label="Navigasi utama">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="index.html">Beranda</a></li>
+          <li><a class="nav-link" href="secret-message.html">Kirim Lagu</a></li>
+          <li><a class="nav-link active" href="notifications.html">Notifikasi</a></li>
+          <li><a class="nav-link" href="login.html" id="loginLink">Masuk</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="ig-notify-page">
+    <section class="ig-notify-shell">
+      <header class="ig-notify-head">
+        <div>
+          <p class="ig-notify-kicker">Aktivitas</p>
+          <h1>Notifikasi</h1>
+        </div>
+        <div class="ig-notify-actions">
+          <button type="button" class="ghost-btn" id="refreshNotifyBtn">Muat Ulang</button>
+          <button type="button" class="ghost-btn" id="markSeenBtn">Tandai Dibaca</button>
+        </div>
+      </header>
+
+      <p class="ig-notify-status" id="notifyStatus">Memuat notifikasi...</p>
+
+      <div class="ig-notify-filters" id="notifyFilters">
+        <button type="button" class="ghost-btn is-active" data-filter="all">Semua</button>
+        <button type="button" class="ghost-btn" data-filter="interaction">Interaksi</button>
+        <button type="button" class="ghost-btn" data-filter="friend">Pertemanan</button>
+        <button type="button" class="ghost-btn" data-filter="system">Sistem</button>
+      </div>
+
+      <section class="ig-notify-group">
+        <h2>Baru</h2>
+        <div id="notifyRecentList" class="ig-notify-list"></div>
+      </section>
+
+      <section class="ig-notify-group">
+        <h2>Minggu Ini</h2>
+        <div id="notifyWeekList" class="ig-notify-list"></div>
+      </section>
+
+      <section class="ig-notify-group">
+        <h2>Sebelumnya</h2>
+        <div id="notifyOlderList" class="ig-notify-list"></div>
+      </section>
+    </section>
+  </main>
+
+  <script src="supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/notifications.js"></script>
+</body>
+</html>

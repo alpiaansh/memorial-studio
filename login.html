@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff2f92">
+  <title>Masuk | Memoflix</title>
+  <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <script src="js/entry-gate.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-stack">
+        <a class="brand" href="main-menu.html">Memoflix</a>
+        <p class="brand-note">Masuk atau daftar untuk pengalaman penuh Memoflix.</p>
+      </div>
+      <nav class="top-nav" aria-label="Navigasi utama">
+        <ul class="nav-list">
+          <li><a class="nav-link active" href="login.html">Masuk</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="auth-page">
+    <section class="auth-card">
+      <h1>Akun Memoflix</h1>
+      <p class="auth-copy">Supaya bisa komentar dan di-tag user lain, kamu harus login dulu. Saat daftar, pilih username.</p>
+
+      <div class="auth-tabs" role="tablist" aria-label="Mode masuk">
+        <button class="auth-tab active" id="tabLogin" type="button" role="tab" aria-controls="loginPanel" aria-selected="true">Sudah Punya Akun</button>
+        <button class="auth-tab" id="tabRegister" type="button" role="tab" aria-controls="registerPanel" aria-selected="false">Belum Punya Akun</button>
+      </div>
+
+      <section class="auth-panel active" id="loginPanel" role="tabpanel" aria-labelledby="tabLogin">
+        <form id="loginForm" class="auth-form">
+          <label class="auth-label" for="loginEmail">Gmail</label>
+          <input class="auth-input" id="loginEmail" type="email" placeholder="nama@gmail.com" required>
+
+          <label class="auth-label" for="loginPassword">Password</label>
+          <input class="auth-input" id="loginPassword" type="password" minlength="6" placeholder="Minimal 6 karakter" required>
+
+          <button class="close-btn auth-submit" type="submit">Masuk</button>
+        </form>
+      </section>
+
+      <section class="auth-panel" id="registerPanel" role="tabpanel" aria-labelledby="tabRegister">
+        <form id="registerForm" class="auth-form">
+          <label class="auth-label" for="registerName">Nama</label>
+          <input class="auth-input" id="registerName" type="text" maxlength="40" placeholder="Nama kamu" required>
+
+          <label class="auth-label" for="registerUsername">Username</label>
+          <input class="auth-input" id="registerUsername" type="text" minlength="3" maxlength="24" placeholder="Contoh: isabelalalaletsgo" required>
+
+          <label class="auth-label" for="registerEmail">Gmail</label>
+          <input class="auth-input" id="registerEmail" type="email" placeholder="nama@gmail.com" required>
+
+          <label class="auth-label" for="registerPassword">Password</label>
+          <input class="auth-input" id="registerPassword" type="password" minlength="6" placeholder="Minimal 6 karakter" required>
+
+          <label class="auth-label" for="registerPasswordConfirm">Verifikasi Password</label>
+          <input class="auth-input" id="registerPasswordConfirm" type="password" minlength="6" placeholder="Ulangi password" required>
+
+          <button class="close-btn auth-submit" type="submit">Daftar & Masuk</button>
+        </form>
+      </section>
+
+      <p class="auth-status" id="authStatus">Status: belum masuk.</p>
+      <div class="auth-actions">
+        <button class="ghost-btn" id="logoutBtn" type="button">Keluar</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

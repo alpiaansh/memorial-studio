@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff2f92">
+  <title>Dasbor Admin | Memoflix</title>
+  <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <script src="js/entry-gate.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-stack">
+        <a class="brand" href="index.html">Memoflix</a>
+        <p class="brand-note">Siaran dan kelola memorial dari panel admin.</p>
+      </div>
+      <nav class="top-nav" aria-label="Navigasi utama">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="index.html">Beranda</a></li>
+          <li><a class="nav-link" href="notifications.html">Notifikasi</a></li>
+          <li><a class="nav-link" href="profile.html">Profil</a></li>
+          <li><a class="nav-link active" href="admin-dashboard.html">Admin</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="admin-page">
+    <section class="admin-shell" id="adminShell">
+      <article class="admin-card admin-head-card">
+        <h1>Dasbor Admin</h1>
+        <p class="admin-subtitle">Kelola siaran sistem dan memorial beranda secara terpusat.</p>
+        <p class="admin-status" id="adminAccessStatus">Memeriksa akses admin...</p>
+      </article>
+
+      <section class="admin-grid">
+        <article class="admin-card admin-section-card">
+          <h2>Siaran Sistem</h2>
+          <p class="admin-helper">Pesan akan masuk ke chat broadcast semua user.</p>
+          <form id="adminBroadcastForm" class="admin-form">
+            <input id="broadcastTitle" type="text" placeholder="Judul update (contoh: Patch v2.0)">
+            <input id="broadcastSection" type="text" placeholder="Bagian (contoh: Beranda, Notifikasi)">
+            <textarea id="broadcastMessage" rows="4" placeholder="Isi pengumuman untuk semua pengguna..." required></textarea>
+            <button type="submit" class="ghost-btn">Kirim Siaran</button>
+          </form>
+          <p class="admin-status" id="broadcastStatus"></p>
+        </article>
+
+        <article class="admin-card admin-section-card">
+          <h2>Tambah Memorial</h2>
+          <p class="admin-helper">Untuk path media, isi relatif dari folder <code>assets/</code>.</p>
+          <form id="adminMemorialForm" class="admin-form">
+            <input id="memorialEditId" type="hidden">
+            <input id="memorialTitle" type="text" placeholder="Judul memorial" required>
+            <input id="memorialYear" type="text" placeholder="Tanggal/Tahun (contoh: 21 Februari 2026)" required>
+            <input id="memorialShort" type="text" placeholder="Ringkasan singkat" required>
+            <input id="assetBaseDir" type="text" value="assets" placeholder="Base folder assets (default: assets)">
+            <input id="memorialCover" type="text" placeholder="Cover (contoh: Gacoan 1/Gacoan 1 (1).jpg)" required>
+            <input id="memorialPoster" type="text" placeholder="Poster video (opsional, default: cover)">
+            <input id="memorialThumb" type="text" placeholder="Thumbnail list (opsional, default: poster/cover)">
+            <textarea id="memorialStory" rows="6" placeholder="Isi cerita lengkap..." required></textarea>
+            <textarea id="memorialMediaPaths" rows="5" placeholder="Media list (1 baris 1 path), contoh:\nGacoan 1/Gacoan 1 (1).jpg\nGacoan 1/Gacoan 1 (1).mp4\nGacoan 1/Gacoan 1 (2).jpg"></textarea>
+            <textarea id="memorialGallery" rows="4" placeholder='JSON gallery, contoh: [{"type":"image","src":"assets/a.jpg","poster":"assets/a.jpg","thumb":"assets/a.jpg"}]'></textarea>
+            <div class="profile-actions">
+              <button type="submit" class="ghost-btn" id="memorialSubmitBtn">Tambah Memorial</button>
+              <button type="button" class="ghost-btn hidden" id="memorialCancelEditBtn">Batal Edit</button>
+            </div>
+          </form>
+          <p class="admin-status" id="memorialStatus"></p>
+        </article>
+      </section>
+
+      <article class="admin-card admin-section-card">
+        <div class="admin-list-head">
+          <h2>Memorial Tambahan</h2>
+          <button type="button" class="ghost-btn" id="refreshAdminMemorialsBtn">Muat Ulang</button>
+        </div>
+        <div id="adminMemorialList" class="admin-memorial-list"></div>
+      </article>
+    </section>
+  </main>
+
+  <script src="supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin-dashboard.js"></script>
+</body>
+</html>

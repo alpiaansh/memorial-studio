@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff2f92">
+  <title>Kenangan Kita</title>
+  <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <script src="js/entry-gate.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-stack">
+        <a class="brand" href="index.html">Memoflix</a>
+        <p class="brand-note">Beranda memorial dan cerita pilihan.</p>
+      </div>
+      <nav class="top-nav" aria-label="Navigasi utama">
+        <ul class="nav-list">
+          <li><a class="nav-link active" href="#our-memory">Kenangan Kita</a></li>
+          <li><a class="nav-link" href="#timeline">Linimasa</a></li>
+          <li><a class="nav-link" href="secret-message.html">Kirim Lagu</a></li>
+          <li><a class="nav-link" href="login.html" id="loginLink">Masuk</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" aria-label="Hero memorial" style="--hero-image: url('assets/B&B/bnb (2).jpg');">
+    <div class="hero-content">
+      <p class="hero-kicker">Album Kita</p>
+      <h1>Cerita Di Balik Setiap Foto</h1>
+      <p>
+        Klik salah satu memorial untuk membaca kisahnya.
+        Website ini dibuat karena setiap moment memiliki cerita indah dibaliknya.
+      </p>
+    </div>
+  </section>
+
+  <main class="catalog" id="our-memory">
+    <div class="section-head">
+      <h2>Koleksi Memorial</h2>
+      <span>Klik foto untuk membuka cerita</span>
+    </div>
+
+    <div class="photo-grid" id="photoGrid"></div>
+  </main>
+
+  <section class="catalog popular-catalog" id="popular-memory">
+    <div class="section-head">
+      <h2>Memorial Populer</h2>
+      <span>Berdasarkan like dan komentar</span>
+    </div>
+    <div class="photo-grid" id="popularGrid"></div>
+  </section>
+
+  <section class="timeline-section" id="timeline">
+    <div class="timeline-inner">
+      <div class="section-head">
+        <h2>Linimasa Kenangan</h2>
+        <span>Perjalanan cerita dari waktu ke waktu</span>
+      </div>
+      <div class="timeline-list" id="timelineList"></div>
+    </div>
+  </section>
+
+  <div class="modal" id="storyModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-panel" id="modalPanel">
+      <div class="modal-media">
+        <div class="modal-photo" id="modalPhoto">
+          <video id="modalPhotoVideo" class="modal-photo-video hidden" playsinline muted loop controls preload="metadata"></video>
+          <button class="media-play-btn hidden" id="mediaPlayBtn" type="button" aria-label="Putar video">▶ Putar</button>
+          <button class="media-nav-btn media-nav-prev" id="mediaPrevBtn" type="button" aria-label="Media sebelumnya">&lt;</button>
+          <button class="media-nav-btn media-nav-next" id="mediaNextBtn" type="button" aria-label="Media berikutnya">&gt;</button>
+          <p class="media-counter" id="mediaCounter">1 / 1</p>
+          <button class="fs-close-btn" id="closeFullscreenBtn" type="button">Tutup Fullscreen</button>
+          <div class="modal-photo-overlay">
+            <h3 id="modalTitle"></h3>
+            <p class="modal-year" id="modalMeta"></p>
+          </div>
+        </div>
+        <div class="modal-gallery" id="modalGallery" aria-label="Pilihan foto lainnya"></div>
+      </div>
+      <div class="modal-content">
+        <div class="story-tools story-tools-primary">
+          <button class="ghost-btn action-play" id="readStoryBtn" type="button">Cerita</button>
+          <button class="ghost-btn action-mylist" data-role="open-comments" type="button">Komentar</button>
+        </div>
+        <div class="story-tools story-tools-secondary">
+          <button class="ghost-btn action-like" data-role="like-memorial" type="button">❤ Suka</button>
+        </div>
+        <section id="coverPanel">
+          <p id="modalStoryIntro"></p>
+          <p class="modal-hint">Tekan Cerita untuk mulai membaca cerita.</p>
+        </section>
+        <section id="readerPanel" class="hidden">
+          <p class="modal-year" id="readerProgress">Halaman 1 / 1</p>
+          <article id="modalStory"></article>
+          <div class="story-tools">
+            <button class="ghost-btn" id="readerPrevBtn" type="button">Sebelumnya</button>
+            <button class="ghost-btn" id="readerNextBtn" type="button">Berikutnya</button>
+            <button class="ghost-btn close-top-btn" id="closeModalTop" type="button">Tutup Cerita</button>
+          </div>
+          <section id="readerEnding" class="hidden">
+            <h4>Cerita Lainnya</h4>
+            <div class="reader-suggestions" id="readerSuggestions"></div>
+            <div class="story-tools">
+              <p>Rekomendasi lainnya.</p>
+            </div>
+          </section>
+          <section id="nextEpisodePeek" class="next-episode-section hidden" aria-live="polite">
+            <h4>Episode Sebelumnya & Sesudahnya</h4>
+            <div class="reader-suggestions" id="nextEpisodeGrid"></div>
+          </section>
+        </section>
+        <p class="modal-hint">Tip: tekan ESC untuk menutup.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="comments-peek" id="commentsPeek" role="dialog" aria-modal="true" aria-labelledby="commentsPeekTitle">
+    <div class="comments-peek-panel">
+      <div class="comments-peek-head">
+          <h4 id="commentsPeekTitle">Semua komentar</h4>
+        <button class="ghost-btn" id="closeCommentsPeek" type="button">Tutup</button>
+      </div>
+      <a href="login.html" id="commentLoginHint">Buat akun (opsional)</a>
+      <div class="comment-list" id="commentList"></div>
+      <form id="commentForm" class="comment-form">
+        <div class="comment-replying hidden" id="commentReplying">
+          <p id="commentReplyingText"></p>
+          <button class="ghost-btn" id="cancelReplyBtn" type="button">Batal Balas</button>
+        </div>
+        <textarea id="commentInput" rows="3" placeholder="Tulis komentar untuk memorial ini..."></textarea>
+        <button class="close-btn" type="submit">Kirim Komentar</button>
+      </form>
+    </div>
+  </div>
+
+  <script id="memorialData" type="application/json">
+  [
+    {
+      "title": "City Light di B&B Coffe Shop",
+      "year": "25 Desember 2025",
+      "short": "Mamah nungguin di Gateway.",
+      "cover": "assets/B&B/bnb (2).jpg",
+      "gallery": [
+        {
+          "type": "image",
+          "src": "assets/B&B/bnb (1).jpg"
+        },
+        {
+          "type": "image",
+          "src": "assets/B&B/bnb (2).jpg"
+        },
+        {
+          "type": "image",
+          "src": "assets/B&B/bnb (3).jpg"
+        },
+        {
+          "type": "image",
+          "src": "assets/B&B/bnb (4).jpg"
+        },
+        {
+          "type": "image",
+          "src": "assets/B&B/bnb (5).jpg"
+        }
+      ],
+      "story": "Sore itu, aku dan kamu pergi berdua ke Beans & Butter Coffee Shop. Itu pertama kalinya kita main agak jauh ke sana—selain ke Summarecon, yang jadi titik awal kita mulai dekat. Aku menuliskan ini hanya untuk menambah kenangan, supaya hari itu tidak hilang begitu saja ditelan waktu. <br><br>Waktu itu kamu pamit ke mamahmu dengan kebohongan kecil. Sampai sekarang kalau kuingat rasanya lucu sekali. Ada nada gugup di suaramu yang berusaha terdengar biasa saja, sementara aku di sampingmu hampir tertawa menahan gemas. Entah kenapa, momen sederhana seperti itu justru terasa hangat. <br><br>Di sana, kita benar-benar bercerita panjang lebar. Tentang banyak hal. Tentang hal-hal yang bahkan terlalu pribadi untuk kutulis ulang di sini. Yang jelas, sore itu jadi salah satu titik di mana aku sadar—kedekatan kita bukan lagi sekadar kebetulan. Ada sesuatu yang tumbuh perlahan, tapi pasti. <br><br>Kamu memberiku kenyamanan yang belum pernah kurasakan sebelumnya. Cara kamu menarikku lebih dekat, cara tanganmu memelukku dengan mantap tapi tetap lembut. Aku suka dipeluk seperti itu—rasanya aman. Dan aku tahu kamu suka ketika rambutmu kuelus pelan, jari-jariku menyusuri helai-helainya dengan hati-hati. Hal kecil, tapi terasa berarti. <br><br>Waktu berjalan terlalu cepat. Kita harus pulang karena mamahmu terus menelepon. Berkali-kali. Bahkan sampai menunggu di Gateway. Aku masih ingat bagaimana kita saling berpandangan, setengah panik, setengah ingin menunda perpisahan. <br><br>Di atas motor, sebelum benar-benar berpisah, aku teringat janjiku untuk selalu memelukmu. Tapi entah kenapa, saat sudah sampai, aku malah takut turun. Jantungku berdegup lebih cepat dari biasanya. Aku takut tiba-tiba mamahmu muncul—apalagi dia sedang menunggu di Gateway. Jadi akhirnya kita hanya berpelukan di atas motor. <br><br>Kamu sempat bilang itu tidak romantis. Aku langsung tertawa. Memang sih, kalau dipikir-pikir, agak aneh juga. Dua orang berpelukan di atas motor dengan perasaan campur aduk antara bahagia dan takut ketahuan. Tapi justru di situ lucunya. Justru di situ manisnya. <br><br>Serius, hari itu sederhana—tidak ada yang luar biasa dari luar. Hanya dua orang, kopi yang mulai mendingin, dan panggilan telepon yang tak berhenti. Tapi bagiku, sore itu terasa penuh. Hangat. Dan setiap kali kuingat, aku masih bisa merasakan pelukan itu—dan bagaimana aku takut sekaligus bahagia dalam waktu yang sama."
+      },
+      {
+      "title": "Pulang Larut Malam",
+      "year": "3 Januari 2026",
+      "short": "Semua Kesan Pertama",
+      "cover": "assets/Gacoan 1/Gacoan 1 (1).jpg",
+      "gallery": [
+        {
+          "type": "image",
+          "src": "assets/Gacoan 1/Gacoan 1 (1).jpg"
+        },
+        {
+          "type": "image",
+          "src": "assets/Gacoan 1/Gacoan 1 (2).jpg"
+        },
+        {
+          "type": "image",
+          "src": "assets/Gacoan 1/Gacoan 1 (3).jpg"
+        }
+      ],
+      "story": "Ini terjadi waktu kita ke Gacoan setelah beres closing. Sumpah, kalau diingat sekarang masih bikin aku ketawa sendiri. Entah kenapa, malam itu terasa ringan dan penuh—dan sampai sekarang, itu jadi salah satu momen terbaik yang pernah aku rasakan. Karena di tanggal itu, semua kesan pertama terasa begitu jelas.<br><br>Kita duduk lama banget. Ngobrol sampai jam dua pagi. Udara malam sudah dingin, lampu-lampu parkiran memantulkan cahaya kekuningan di aspal yang sedikit lembap, Tempat itu tidak benar-benar sepi. Beberapa orang masih duduk menikmati makanan mereka, suara sendok beradu dengan piring sesekali terdengar, bercampur dengan obrolan pelan yang mengalun di tengah malam. Dari luar, deru kendaraan di jalan raya mengisi udara tanpa henti—kadang motor melintas dengan knalpot yang terlalu nyaring. Sesekali suara petugas Gacoan terdengar dari pengeras suara, memanggil nomor antrean dengan nada datar yang berulang. Di tengah semua kebisingan itu, entah kenapa, aku tetap merasa seperti kita punya ruang sendiri.<br><br>Dan tentu saja, karena aku orangnya analis banget, mataku nggak bisa diam.<br><br>Saat aku menoleh ke kanan, aku langsung membeku. Dua orang yang aku kenal—si Olaf dan Elsa (nama samaran)—duduk nggak jauh dari kita. Jujur, aku nggak menyangka sama sekali bakal ketemu mereka di situ, jam segitu pula. Rasanya absurd.<br><br>Kamu sama sekali nggak sadar.<br><br>Dan aku? Aku sengaja nggak kasih tahu kamu. Karena di kepalaku langsung muncul satu skenario: kalau kamu tahu, kamu pasti bakal jadi canggung. Dan aku nggak mau itu. Aku nggak mau momen kita berubah jadi kaku hanya karena ada orang lain. Jadi aku tahan sendiri rasa kocak itu, pura-pura fokus ke obrolan kita, pura-pura semuanya normal.<br><br>Padahal di dalam kepala, aku sudah hampir meledak ketawa.<br><br>Kamu bahkan sempat bilang aku kelihatan aneh, kayak nggak bisa diam. Padahal aku cuma lagi nahan reaksi. Aku berusaha tetap menatap kamu, tetap mendengarkan dengan serius, tapi tiap beberapa detik otakku berteriak pelan, “Itu Olaf, anjir.”<br><br>Belum selesai sampai situ. <br><br>Beberapa menit kemudian, aku melirik ke arah parkiran. Dan benar saja—dua orang lagi yang aku kenal baru saja datang. Di situ rasanya sudah benar-benar nggak karuan. Aku harus menahan ekspresi supaya nggak kelihatan panik sekaligus ngakak. Untungnya mereka cuma ambil makanan dan langsung bawa pulang.<br><br>Tapi puncaknya adalah waktu si Olaf menelepon dua orang yang baru datang tadi. Aku langsung tegang. Takut kamu sadar mereka ada di sekitar kita. Refleks, aku kasih isyarat kecil ke arah Olaf—gerakan tangan cepat, setengah memohon—buat bilang jangan ganggu.<br>Dan kamu mulai kelihatan risih lihat tingkahku.<br><br>Ya Tuhan, kalau diingat sekarang, itu benar-benar lucu banget. Kamu mungkin mikir aku kenapa sih gerak-gerak nggak jelas, sementara aku lagi berusaha mati-matian menjaga malam kita tetap utuh, nggak terganggu siapa pun.<br>Akhirnya, kita pulang karena mamahmu mulai nanyain. Jam sudah terlalu larut untuk alasan apa pun.<br><br>Seperti biasa, aku mengantarmu sampai ke gang tempat yang sering jadi titik perpisahan kita. Jalanan lebih sunyi dari biasanya. Angin malam menyentuh wajahku, membawa bau aspal dan sisa gorengan dari warung yang hampir tutup. Tapi di dadaku justru terasa hangat.<br>Aku selalu senang bisa mengantarmu pulang. Selalu.<br><br>Dan kali ini, aku benar-benar bisa memelukmu dengan layak. Bukan lagi di atas motor seperti sebelumnya. Aku menarikmu ke dalam pelukanku, dan rasanya lebih lama, lebih dalam. Aku gemas sekali sama kamu malam itu. Tanpa banyak pikir, aku mencium kamu.<br><br>Di momen itu, semuanya terasa jelas. Cara kamu membuatku nyaman. Cara aku merasa tenang hanya dengan berada dekatmu. Rasanya seperti dunia berhenti sebentar, memberi kita ruang kecil untuk menikmati apa yang kita punya.<br>Lalu aku benar-benar pulang.<br><br>Dan sepanjang perjalanan menuju rumah, aku salting sendiri di atas motor. Senyumku nggak bisa hilang. Aku mengulang-ulang adegan tadi di kepala—cara kamu membalas pelukanku, ekspresimu, detik ketika bibir kita bertemu. Jantungku masih berdegup lebih cepat dari biasanya. Bahkan angin malam yang menampar wajahku terasa berbeda, seolah ikut membawa sisa kehangatan dari pelukanmu.<br>Aku sempat ketawa sendiri di jalan. Untung sepi.<br><br>Malam itu bukan cuma tentang Gacoan atau kebetulan ketemu orang-orang yang aku kenal. Malam itu tentang bagaimana aku merasa begitu dekat denganmu. Begitu nyaman.<br>Aku sayang banget sama kamu, Isabella."
+      }
+    ]
+  </script>
+
+  <script src="supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
